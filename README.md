@@ -1,2 +1,2 @@
 # Data-Structure
-data structure from scratch
+Data structure from scratch
