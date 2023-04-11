@@ -21,6 +21,10 @@ int main(){
     if(node2 == nullptr) std::cout << "Find no key " << 901 << " in the Binary Search Tree." << '\n';
     else std::cout << "Find key " << node2->get_key() << ". The data is " << node2->get_data() << '\n';
 
+    std::cout << "After sort:" << '\n';
+    BSTree.print_sort(BSTree.root);
+    std::cout << '\n';
+
 
     return 0;
 }

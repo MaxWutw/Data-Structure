@@ -24,6 +24,7 @@ public:
     void Inorder(Node *cur);
     void Preorder(Node *cur);
     void Postorder(Node *cur);
+    void print_sort(Node *cur);
 };
 
 Node* BST::Search(int k){
@@ -78,6 +79,14 @@ void BST::Postorder(Node *cur){ //LRV
         Postorder(cur->leftchild);
         Postorder(cur->rightchild);
         std::cout << cur->data << ' ';
+    }
+}
+
+void BST::print_sort(Node *cur){ // Inorder Traversal is sort of the data
+    if(cur){
+        print_sort(cur->leftchild);
+        std::cout << cur->key << ' ';
+        print_sort(cur->rightchild);
     }
 }
 
