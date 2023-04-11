@@ -10,12 +10,12 @@ protected:
 public:
     Node():leftchild(nullptr), rightchild(nullptr), parent(nullptr), data(""), key(0){};
     Node(int num, std::string d):leftchild(nullptr), rightchild(nullptr), parent(nullptr), data(d), key(num){};
+    int get_key(){return key;}
+    std::string get_data(){return data;}
     friend class BST;
 };
 
 class BST{
-private:
-    
 public:
     Node *root;
     BST():root(nullptr){};
