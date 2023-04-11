@@ -15,7 +15,7 @@ public:
     friend class BST;
 };
 
-class BST: public Node{
+class BST{
 private:
     Node *root;
 public:
