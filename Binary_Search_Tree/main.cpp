@@ -9,7 +9,7 @@ int main(){
     BSTree.Insert(513,"比克");
 
     std::cout << "Inorder Traversal:" << '\n';
-    BSTree.Inorder(0);
+    BSTree.Inorder(BSTree.root);
     std::cout << '\n';
     
 

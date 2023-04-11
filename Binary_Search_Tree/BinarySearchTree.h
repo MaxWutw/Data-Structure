@@ -1,6 +1,4 @@
 #include <iostream>
-#include <queue>
-#include <sstream>
 #ifndef BinarySearchTree_h
 #define BinarySearchTree_h
 
@@ -17,9 +15,10 @@ public:
 
 class BST{
 private:
-    Node *root;
+    
 public:
-    BST():root(0){};
+    Node *root;
+    BST():root(nullptr){};
     Node *Search(int k);
     void Insert(int k, std::string d);
     void Inorder(Node *cur);
@@ -39,9 +38,10 @@ Node* BST::Search(int k){
 }
 
 void BST::Insert(int k, std::string d){
-    Node *p = nullptr, *c = root;
+    Node *p = nullptr;
     Node *cur = nullptr;
     Node *insert_node = new Node(k, d);
+    cur = root;
     while(cur != nullptr){
         p = cur;
         if(insert_node->key < cur->key)
