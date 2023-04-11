@@ -1,3 +1,7 @@
 *.exe
 /.vscode
+<<<<<<< HEAD
 test_code.cpp
+=======
+*.out
+>>>>>>> 112106444f0e1bf4eb2da1ffbe47e367f2f8f490
