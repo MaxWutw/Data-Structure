@@ -3,14 +3,14 @@
 int main(){
     BST BSTree;
 
-    BSTree.InsertBST(8,"龜仙人");
-    BSTree.InsertBST(1000,"悟空");
-    BSTree.InsertBST(2,"克林");
-    BSTree.InsertBST(513,"比克");
+    BSTree.Insert(8,"龜仙人");
+    BSTree.Insert(1000,"悟空");
+    BSTree.Insert(2,"克林");
+    BSTree.Insert(513,"比克");
 
-    cout << "Inorder Traversal:" << '\n';
-    BSTree.Inorder();
-    cout << '\n';
+    std::cout << "Inorder Traversal:" << '\n';
+    BSTree.Inorder(0);
+    std::cout << '\n';
     
 
     return 0;

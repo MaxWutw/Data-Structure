@@ -11,16 +11,17 @@ protected:
     int key;
 public:
     Node():leftchild(nullptr), rightchild(nullptr), parent(nullptr), data(""), key(0){};
-    Node(int num, string d):leftchild(nullptr), rightchild(nullptr), parent(nullptr), data(d), key(num){};
+    Node(int num, std::string d):leftchild(nullptr), rightchild(nullptr), parent(nullptr), data(d), key(num){};
+    friend class BST;
 };
 
 class BST: public Node{
 private:
     Node *root;
 public:
-    Node():root(0){};
+    BST():root(0){};
     Node *Search(int k);
-    void Insert(string d, int k);
+    void Insert(int k, std::string d);
     void Inorder(Node *cur);
     void Preorder(Node *cur);
     void Postorder(Node *cur);
@@ -29,7 +30,7 @@ public:
 Node* BST::Search(int k){
     Node *cur = root;
     while(cur != nullptr && cur->key != k){
-        if(k < cur->leftchild)
+        if(k < cur->key)
             cur = cur->leftchild;
         else
             cur = cur->rightchild;
@@ -37,7 +38,7 @@ Node* BST::Search(int k){
     return cur;
 }
 
-void BST::Insert(string d, int k){
+void BST::Insert(int k, std::string d){
     Node *p = nullptr, *c = root;
     Node *cur = nullptr;
     Node *insert_node = new Node(k, d);
@@ -46,7 +47,7 @@ void BST::Insert(string d, int k){
         if(insert_node->key < cur->key)
             cur = cur->leftchild;
         else
-            cur = cur->rightchild
+            cur = cur->rightchild;
     }
     insert_node->parent = p;
     if(p == nullptr)
@@ -60,13 +61,13 @@ void BST::Insert(string d, int k){
 void BST::Inorder(Node *cur){ // LVR
     if(cur){
         Inorder(cur->leftchild);
-        cout << cur->data << ' ';
+        std::cout << cur->data << ' ';
         Inorder(cur->rightchild);
     }
 }
 void BST::Preorder(Node *cur){ // VLR
     if(cur){
-        cout << cur->data << ' ';
+        std::cout << cur->data << ' ';
         Preorder(cur->leftchild);
         Preorder(cur->rightchild);
     }
@@ -75,8 +76,8 @@ void BST::Preorder(Node *cur){ // VLR
 void BST::Postorder(Node *cur){ //LRV
     if(cur){
         Postorder(cur->leftchild);
-        Postorder(cur->rightchld);
-        cout << cur->data << ' ';
+        Postorder(cur->rightchild);
+        std::cout << cur->data << ' ';
     }
 }
 
