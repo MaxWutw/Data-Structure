@@ -20,11 +20,13 @@ public:
     Node *root;
     BST():root(nullptr){};
     Node *Search(int k);
+    Node *Successor(Node *node);
     void Insert(int k, std::string d);
     void Inorder(Node *cur);
     void Preorder(Node *cur);
     void Postorder(Node *cur);
     void print_sort(Node *cur);
+    void Delete_node(int delete_key);
 };
 
 Node* BST::Search(int k){
@@ -36,6 +38,10 @@ Node* BST::Search(int k){
             cur = cur->rightchild;
     }
     return cur;
+}
+
+Node* BST::Successor(Node *node){
+    
 }
 
 void BST::Insert(int k, std::string d){
@@ -82,12 +88,45 @@ void BST::Postorder(Node *cur){ //LRV
     }
 }
 
-void BST::print_sort(Node *cur){ // Inorder Traversal is sort of the data
+void BST::print_sort(Node *cur){ // Inorder Traversal is the sort of the data
     if(cur){
         print_sort(cur->leftchild);
         std::cout << cur->key << ' ';
         print_sort(cur->rightchild);
     }
+}
+
+void BST::Delete_node(int delete_key){
+    Node *delete_node = BST.Search(delete_key);
+    if(delete_node == nullptr){
+        std::cout << "Data not found!" << '\n';
+        return;
+    }
+    Node *del = nullptr, *delch = nullptr;
+
+    if(delete_node->leftchild != nullptr || delete_node->rightchild)
+        del = delete_node;
+    else
+        del = Successor(delete_node);
+    if(del->leftchild != nullptr)
+        delch = del->leftchild;
+    else 
+        delch = del->rightchild;
+
+    if(delch != nullptr)
+        delch->parent = del->parent;
+
+    if(del->parent == nullptr) 
+        this.root = delch;
+    else if(del->parent->leftchild == del)
+        del->parent->leftchild = delch;
+    else
+        del->parent->rightchild = delch;
+    if(del != delete_node){
+        delete_node->key = del->data;
+        delete_node->data = del->data;
+    }
+    delete del;
 }
 
 #endif
