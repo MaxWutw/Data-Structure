@@ -19,8 +19,9 @@ class BST{
 public:
     Node *root;
     BST():root(nullptr){};
-    Node *Search(int k);
-    Node *Successor(Node *node);
+    Node* Search(int k);
+    Node* Left(Node *cur);
+    Node* Successor(Node *cur);
     void Insert(int k, std::string d);
     void Inorder(Node *cur);
     void Preorder(Node *cur);
@@ -40,8 +41,23 @@ Node* BST::Search(int k){
     return cur;
 }
 
-Node* BST::Successor(Node *node){
+Node* BST::Left(Node *cur){
+    while(cur->leftchild != nullptr){
+        cur = cur->leftchild;
+    }
+    return cur;
+}
+
+Node* BST::Successor(Node *cur){
+    if(cur->rightchild != nullptr)
+        return Left(cur->rightchild);
     
+    Node *successor = cur->parent;
+    while(successor != nullptr && successor->rightchild == cur){
+        cur = successor;
+        successor = successor->parent;
+    }
+    return successor;
 }
 
 void BST::Insert(int k, std::string d){
@@ -97,14 +113,14 @@ void BST::print_sort(Node *cur){ // Inorder Traversal is the sort of the data
 }
 
 void BST::Delete_node(int delete_key){
-    Node *delete_node = BST.Search(delete_key);
+    Node *delete_node = Search(delete_key);
     if(delete_node == nullptr){
         std::cout << "Data not found!" << '\n';
         return;
     }
     Node *del = nullptr, *delch = nullptr;
 
-    if(delete_node->leftchild != nullptr || delete_node->rightchild)
+    if(delete_node->leftchild == nullptr || delete_node->rightchild == nullptr)
         del = delete_node;
     else
         del = Successor(delete_node);
@@ -116,14 +132,14 @@ void BST::Delete_node(int delete_key){
     if(delch != nullptr)
         delch->parent = del->parent;
 
-    if(del->parent == nullptr) 
-        this.root = delch;
+    if(del->parent == nullptr)
+        this->root = delch;
     else if(del->parent->leftchild == del)
         del->parent->leftchild = delch;
     else
         del->parent->rightchild = delch;
     if(del != delete_node){
-        delete_node->key = del->data;
+        delete_node->key = del->key;
         delete_node->data = del->data;
     }
     delete del;
